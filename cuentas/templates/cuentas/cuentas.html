@@ -1,0 +1,158 @@
+{% extends 'cuentas/base.html' %}
+
+{% block title %} Dinerosss {% endblock %}
+
+{% block content %}
+
+AGREGAR CATEGORÍA
+LIMITAR EL NÚMERO DE TRANSACCIONES
+
+<div class="row">
+
+    <div class="col s12 l4">
+        <div class="col s8 l11 offset-s2 offset-l1">
+            
+            <form method="POST" id="transactionForm">{% csrf_token %}
+
+                <div class="formField">
+                    <p>
+                        <span id="tipo">{{form.tipo.label}}:</span>
+
+                        {% for radio in form.tipo %}
+                            <label for="{{radio.id_for_label}}" id="ingreso">
+                                {{radio.tag}}
+                            <span class="radio">{{radio.choice_label}}</span>
+                            </label>
+                        {% endfor %}
+
+                    </p>
+                </div>
+
+                <div class="input-field">
+                    <label>Monto</label>
+                    {{form.cantidad}}
+                </div>
+
+                <div class="formField" id="ptm">
+                    <div class="col s6 l6">
+
+                        <span>Categoría</span>
+                        
+                    
+                        <select multiple required size='5' style="height:100%"
+                        name="categoria" id="id_categoria" class="browser-default">
+
+                            {% for categoria in form.categoria %}
+                                {{categoria.tag}}
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="col s5 l5">
+
+                        <div>
+                            <label>
+                                <input id=radioCategory class="with-gap" type="radio" />
+                                <span>Agregar categoría</span>
+                            </label>
+                            
+                            <div class="input-field">
+                                <label id='categoryLabel' for="addCategory" style="display:inline">Ingrese Categoría</label>
+                                <input id="categoryInput" type="text" class="validate">
+
+                                <p>
+                                    <a href="" id='addCategory' style="visibility:visible">Agregar</a>
+                                </p>
+
+                            </div>
+            
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <div class="input-field">
+                    <label id="labelDescription">Descripción</label>
+                    {{form.descripcion}}
+                </div>
+
+
+                <div class="post" id="divBoton">
+                    <!-- <button onclick="location.href='{% url "seguimiento" %}"\ -->
+                    <button
+                    class="btn waves-effect waves-light" id="botoAgregar" type="submit">Agregar
+                        <i class="material-icons right">monetization_on</i>
+                    </button>
+                </div>
+
+            </form>
+
+            <div id='totalLabel'>
+                <label style="font-size: 20px; color: black;" for="">TOTAL:</label>
+                <label style="font-size: 20px; color: black; padding-left: 10px;" for="">$&nbsp;{{saldo.saldo}}</label>
+            </div>
+
+            {% if 'cero' in request.GET %}
+            <p style="text-align: center">Dinero insuficiente para esta transacción</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="col s12 l5 offset-l1" id="tableDiv">
+        <table id=transactionTable> <!--class='responsive-table'-->
+            <caption><h6>CAMINO A LA RIQUEZA</h6></caption>
+            <thead>
+                <tr>
+                    <th>
+                        Tipo
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Categoría
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for transaccion in transacciones %}
+                    <tr>
+                        <td>
+                            <u><a href="{% url 'detalles' transaccion.id %}" style="color: black;">{{transaccion.tipo}}</a></u>
+                        </td>
+                        <td>
+                            {{transaccion.cantidad}}
+                        </td>
+                        <td>
+                            {% for categoria in transaccion.categoria.all %}
+                                {{categoria}}{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {{transaccion.descripcion}}
+                        </td>
+                        <td>
+                            {{transaccion.created}}
+                        </td>
+                    </tr>
+                {% endfor %}
+            
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

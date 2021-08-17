@@ -1,0 +1,75 @@
+h3{
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+#tableDiv{
+    padding-top: 20px;
+}
+
+.tableFormat table{
+    margin: 10px;
+}
+
+caption{
+    padding-bottom: 10px;
+}
+
+tr:nth-child(even){
+    background-color: rgb(197, 196, 196);
+}
+
+th{
+    border: solid black 1px;
+    padding: 10px;
+    text-align: center;
+    background-color: #04AA6D;
+    color: white;
+}
+
+td{
+    border: solid black 1px;
+    padding: 10px;
+    text-align: center;
+}
+
+#transactionForm{
+    text-align: center;
+    background-color: wheat;
+    padding: 10px;
+}
+
+#tipo{
+    padding-right: 20px;
+}
+
+#ingreso{
+    padding-right: 20px;
+}
+
+#ptm{
+    padding-bottom: 130px;
+}
+
+#id_categoria{
+    border: solid black 1px;
+    background-color: wheat;
+    /*padding-right: 20px;*/
+}
+
+#labelDescription{
+    padding-left: 10px;
+}
+
+#divBoton{
+    padding-top: 10px;
+}
+
+#totalLabel{
+    text-align: center;
+    padding: 10px;
+}
+
+.formField{
+    padding-bottom: 10px;
+}
